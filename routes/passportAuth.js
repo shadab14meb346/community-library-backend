@@ -89,8 +89,8 @@ router.get(
 	"/auth/facebook/callback",
 	passport.authenticate("facebook"),
 	(req, res) => {
-		// console.log(res);
-		res.redirect("http://localhost:3000/");
+		console.log(res.user);
+		res.redirect("http://localhost:3000");
 	}
 );
 // callback google
