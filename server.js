@@ -23,6 +23,7 @@ connectDB();
 // Route files
 // const bootcamps = require('./routes/bootcamps');
 // const courses = require('./routes/courses');
+const community = require("./routes/community");
 const auth = require("./routes/auth");
 const users = require("./routes/users");
 const passportAuth = require("./routes/passportAuth");
@@ -75,6 +76,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Mount routers
 // app.use("/api/v1/bootcamps", bootcamps);
 // app.use("/api/v1/courses", courses);
+app.use("/api/v1/community", community);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/users", users);
 app.use("/api/v1/passportAuth", passportAuth);
