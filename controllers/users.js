@@ -2,6 +2,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const User = require("../models/User");
 const BaseModel = require("../models/BaseModel");
+const Profile = require("../models/Profile");
 // @desc      Get all users
 // @route     GET /api/v1/users
 // @access    Private/Admin
@@ -27,6 +28,14 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 exports.createUser = asyncHandler(async (req, res, next) => {
 	const user = await User.create(req.body);
 	const baseModel = await BaseModel.create({ Type: "user" });
+	const profile = await Profile.create({
+		user,
+		location: "",
+		photo: "",
+		communities: [],
+		borrowedBooks: [],
+		listedBooks: []
+	});
 	res.status(201).json({
 		success: true,
 		data: user

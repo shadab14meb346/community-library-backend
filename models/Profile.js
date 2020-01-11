@@ -5,15 +5,14 @@ const ProfileSchema = new mongoose.Schema({
 		ref: "User"
 	},
 	location: {
-		type: String,
-		unique: true
-	},
-	gender: {
 		type: String
 	},
 	photo: {
 		type: String
 	},
+	communities: [{ type: mongoose.Schema.Types.ObjectId, ref: "Community" }],
+	borrowedBooks: [],
+	listedBooks: [],
 	createdAt: {
 		type: Date,
 		default: Date.now
