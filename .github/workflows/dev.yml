@@ -1,0 +1,17 @@
+name: Dev BackEnd Branch Deployment
+on:
+  push:
+    branches:
+      - development
+jobs:
+  deployToHeroku:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2-beta
+      - name: Deploying to Heroku
+        env:
+          HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        run: |
+          git fetch --unshallow
+          git push --force https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git refs/remotes/origin/development:refs/heads/master
