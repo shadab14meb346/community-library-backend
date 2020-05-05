@@ -27,6 +27,8 @@ const community = require("./routes/community");
 const auth = require("./routes/auth");
 const users = require("./routes/users");
 const passportAuth = require("./routes/passportAuth");
+const book = require("./routes/book");
+const markdown = require("./routes/markdown");
 // const reviews = require('./routes/reviews');
 
 const app = express();
@@ -57,7 +59,7 @@ app.use(xss());
 // Rate limiting
 const limiter = rateLimit({
 	windowMs: 10 * 60 * 1000, // 10 mins
-	max: 100
+	max: 100,
 });
 app.use(limiter);
 
@@ -79,7 +81,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/community", community);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/users", users);
+app.use("/api/v1/book", book);
 app.use("/api/v1/passportAuth", passportAuth);
+app.use("/markdown", markdown);
 // app.use("/api/v1/reviews", reviews);
 
 app.use(errorHandler);
@@ -89,8 +93,9 @@ const PORT = process.env.PORT || 5000;
 const server = app.listen(
 	PORT,
 	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-	)
+		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+			.bold,
+	),
 );
 
 // Handle unhandled promise rejections
